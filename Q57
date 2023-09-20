@@ -1,0 +1,27 @@
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        boolean flag = false;
+        List<int[]> res = new ArrayList<>(Arrays.asList(intervals));
+        for(int i=0;i<intervals.length;i++){
+            if(newInterval[0] < intervals[i][0]){
+                res.add(i, newInterval);
+                flag = true;
+                break;
+            }
+        }
+        if(!flag){
+            res.add(newInterval);
+        }
+        LinkedList<int[]> ll = new LinkedList<>();
+        for(int i=0;i<res.size();i++){
+            if(ll.isEmpty() || ll.getLast()[1] < res.get(i)[0]){
+                ll.add(res.get(i));
+            }
+            else{
+                
+                ll.getLast()[1] = Math.max(ll.getLast()[1], res.get(i)[1]);                
+            }
+        }
+        return ll.toArray(new int[ll.size()][]);
+    }
+}
