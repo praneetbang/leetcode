@@ -1,0 +1,15 @@
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0],b[0]));
+        LinkedList<int[]> m = new LinkedList<>();
+        for(int[] x:intervals){
+            if(m.isEmpty() || m.getLast()[1] < x[0]){
+                m.add(x);
+            }
+            else{
+                m.getLast()[1] = Math.max(m.getLast()[1], x[1]);
+            }
+        }
+        return m.toArray(new int[m.size()][]);
+    }
+}
