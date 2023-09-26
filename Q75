@@ -1,0 +1,20 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        int p0=0, c=0, p2 = nums.length-1;
+        int tmp;
+
+        while(c<=p2){
+            if(nums[c]==0){
+                tmp = nums[c];
+                nums[c++] = nums[p0];
+                nums[p0++] = tmp;
+            }else if(nums[c]==2){
+                tmp = nums[c];
+                nums[c] = nums[p2];
+                nums[p2--] = tmp;
+            } else{
+                c++;
+            }
+        }
+    }
+}
