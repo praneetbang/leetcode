@@ -1,0 +1,18 @@
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        return getValue(s).equals(getValue(t));
+    }
+
+    public String getValue(String ss){
+        Stack<Character> st = new Stack<>();
+        for(char c:ss.toCharArray()){
+            if(c!='#'){
+                st.push(c);
+            }
+            else if(!st.isEmpty()){
+                st.pop();
+            }
+        }
+        return String.valueOf(st);
+    }
+}
