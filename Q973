@@ -1,0 +1,22 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        int t=0;
+        int[][] res = new int[k][2];
+        ArrayList<Integer> dist = new ArrayList<>();
+        for(int[] p:points){
+            dist.add(getDistance(p));
+        }
+        Collections.sort(dist);
+        int distk = dist.get(k-1);
+
+        for(int i=0;i<dist.size();i++){
+            if(getDistance(points[i])<=distk){
+                res[t++] = points[i];
+            }
+        }
+        return res;
+    }
+    private int getDistance(int[] point){
+        return point[0]*point[0] + point[1]*point[1];
+    }
+}
