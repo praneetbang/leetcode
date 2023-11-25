@@ -1,0 +1,33 @@
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+        int m = mat.length, n = mat[0].length;
+        int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int matrix[][] = new int[m][n];
+        boolean visited[][] = new boolean[m][n];
+        Queue<int[]> q = new LinkedList<>();
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                matrix[i][j]=mat[i][j];
+                if(mat[i][j]==0){
+                    q.add(new int[]{i,j,0});
+                    visited[i][j]=true;
+                }
+            }
+        }
+
+        while(!q.isEmpty()){
+            int t[] = q.poll();
+            for(int d[]:directions){
+                int r = t[0]+d[0];
+                int c = t[1]+d[1];
+                if(r>=0 && r<m && c>=0 && c<n && !visited[r][c]){
+                    visited[r][c] = true;
+                    q.add(new int[]{r,c,t[2]+1});
+                    matrix[r][c] = t[2]+1;
+                }
+            }
+        }
+        return matrix;
+    }
+}
