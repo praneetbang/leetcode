@@ -1,0 +1,41 @@
+/*
+// Definition for an Interval.
+class Interval {
+    public int start;
+    public int end;
+
+    public Interval() {}
+
+    public Interval(int _start, int _end) {
+        start = _start;
+        end = _end;
+    }
+};
+*/
+
+class Solution {
+    public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
+        Map<Integer, Integer> map = new TreeMap<>();
+        List<Interval> res = new ArrayList<>();
+
+        for(List<Interval> s : schedule){
+            for(Interval i : s){
+                map.put(i.start, map.getOrDefault(i.start, 0)+1);
+                map.put(i.end, map.getOrDefault(i.end, 0)-1);
+            }
+        }
+
+        int start=-1, count=0;
+        for(int k : map.keySet()){
+            count += map.get(k);
+            if(count==0 && start==-1){
+                start = k;
+            }
+            else if(start!=-1 && count!=0){
+                res.add(new Interval(start, k));
+                start = -1;
+            }
+        }
+        return res;
+    }
+}
