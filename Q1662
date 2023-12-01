@@ -1,0 +1,19 @@
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        int pointer1=0, pointer2=0, pointer3=0, pointer4=0;
+        while(pointer1<word1.length && pointer2<word2.length){
+            if(word1[pointer1].charAt(pointer3++) != word2[pointer2].charAt(pointer4++)){
+                return false;
+            }
+            if(pointer3==word1[pointer1].length()){
+                pointer3=0;
+                pointer1++;
+            }
+            if(pointer4==word2[pointer2].length()){
+                pointer4=0;
+                pointer2++;
+            }
+        }
+        return pointer1==word1.length && pointer2==word2.length;
+    }
+}
