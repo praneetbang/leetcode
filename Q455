@@ -1,0 +1,17 @@
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        int cookieindex=0, greedindex=0;
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        while(cookieindex<s.length && greedindex<g.length){
+            if(g[greedindex]<=s[cookieindex]){
+                greedindex++;
+            }
+           
+                cookieindex++;
+            
+        }
+        return greedindex;
+    }
+}
