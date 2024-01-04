@@ -1,0 +1,18 @@
+class Solution {
+    public int minOperations(int[] nums) {
+        int res=0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for(int n:nums){
+            map.put(n, map.getOrDefault(n, 0)+1);
+        }
+
+        for(int t:map.values()){
+            if(t==1){
+                return -1;
+            }
+            res += Math.ceil((double)t/3);
+        }
+        return res;
+    }
+}
