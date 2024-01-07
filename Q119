@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<List<Integer>> pa= new ArrayList<>();
+
+        pa.add(new ArrayList<>(){{add(1);}});
+
+        for(int i=1;i<=rowIndex;i++){
+            List<Integer> c = new ArrayList<>();
+            List<Integer> p = pa.get(i-1);
+
+            c.add(1);
+
+            for(int j=1;j<p.size();j++){
+                c.add(p.get(j)+p.get(j-1));
+            }
+            c.add(1);
+            pa.add(c);
+        }
+        return pa.getLast();
+    }
+}
