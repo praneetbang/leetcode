@@ -1,0 +1,63 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int amountOfTime(TreeNode root, int start) {
+        int res=-1;
+        Map<Integer, Set<Integer>> graph = new HashMap<>();
+        convert(root, 0, graph);
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(start);
+        Set<Integer> visited = new HashSet<>();
+        visited.add(start);
+
+        while (!queue.isEmpty()) {
+            int l = queue.size();
+            while (l>0) {
+                int v = queue.poll();
+                for(int n:graph.get(v)){
+                    if(!visited.contains(n)){
+                        visited.add(n);
+                        queue.add(n);
+                    }
+                }
+                l--;
+            }
+            res++;
+        }
+        return res;
+    }
+
+    public void convert(TreeNode current, int parent, Map<Integer, Set<Integer>> graph){
+        if(current==null) return;
+
+        if(!graph.containsKey(current.val)){
+            graph.put(current.val, new HashSet<>());
+        }
+        Set<Integer> neighbours = graph.get(current.val);
+
+        if(parent!=0){
+            neighbours.add(parent);
+        }
+        if(current.left!=null){
+            neighbours.add(current.left.val);
+        }
+        if(current.right!=null){
+            neighbours.add(current.right.val);
+        }
+        convert(current.left, current.val, graph);
+        convert(current.right, current.val, graph);
+    }
+}
