@@ -1,0 +1,20 @@
+class Solution {
+    public int maxLength(List<String> arr) {
+        return dfs(arr, 0, "");
+    }
+
+    private int dfs(List<String> arr, int i, String res){
+        Set<Character> set = new HashSet<>();
+        for(char c:res.toCharArray()){
+            set.add(c);
+        }
+        if(set.size()!=res.length()){
+            return 0;
+        }
+        int max = res.length();
+        for(int j=i;j<arr.size();j++){
+            max = Math.max(max, dfs(arr, j+1, res+arr.get(j)));
+        }
+        return max;
+    }
+}
