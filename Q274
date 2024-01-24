@@ -1,0 +1,14 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        int l = citations.length;
+        int count[] = new int[l+1];
+
+        for(int c:citations){
+            count[Math.min(l,c)]++;
+        }
+        int k=l;
+        for (int s = count[l]; k > s; s += count[k])
+            k--;
+        return k;
+    }
+}
